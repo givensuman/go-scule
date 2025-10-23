@@ -34,5 +34,20 @@ func TrainCase(str string, normalize *Normalize) string {
 		s[i] = UpperFirst(str)
 	}
 
+	s = filterWhitespace(s)
 	return strings.Join(s, "-")
+}
+
+func filterWhitespace(strs []string) []string {
+	var out []string
+	
+	for _, str := range strs {
+		if str == "" || str == " " {
+			continue
+		}
+
+		out = append(out, str)
+	}
+
+	return out
 }

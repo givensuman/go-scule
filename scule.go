@@ -34,3 +34,7 @@ type Joiner struct {
 func (o Options) NewJoiner(b string) *Joiner {
 	return &Joiner{Value: b}
 }
+
+func defaultSplitters() *[]string {
+	return &[]string{"-", "_", "/", "."}
+}
