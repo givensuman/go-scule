@@ -1,5 +1,9 @@
 package scule
 
+import (
+	"strings"
+)
+
 /*
 PascalCase formats string by PascalCase convention.
 
@@ -15,6 +19,15 @@ Example:
 	PascalCase("FooBAR", true) 			 // FooBar
 */
 func PascalCase(str string, normalize bool) string {
-	// TODO
-	return ""
+	s := SplitByCase(str, nil)
+
+	for i, str := range s {
+		if normalize {
+			str = strings.ToLower(str)
+		}
+
+		s[i] = UpperFirst(str)
+	}
+
+	return strings.Join(s, "")
 }
