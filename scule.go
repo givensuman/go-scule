@@ -9,5 +9,11 @@ string case conversion.
 */
 type Options struct {
 	// Strictly follow case conventions.
-	normalize bool
+	Normalize bool
+}
+
+func defaultOptions() *Options {
+	return &Options{
+		Normalize: true,
+	}
 }

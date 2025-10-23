@@ -14,15 +14,19 @@ convention.
 
 Example:
 
-	PascalCase("foo-bar_baz", false) // FooBarBaz
-	PascalCase("FooBAR", false) 		 // FooBAR
-	PascalCase("FooBAR", true) 			 // FooBar
+	PascalCase("foo-bar_baz", nil) 		// FooBarBaz
+	PascalCase("FooBAR", nil) 		 		// FooBAR
+	PascalCase("FooBAR", nil) 			 	// FooBar
 */
-func PascalCase(str string, normalize bool) string {
+func PascalCase(str string, opts *Options) string {
+	if opts == nil {
+		opts = defaultOptions()
+	}
+
 	s := SplitByCase(str, nil)
 
 	for i, str := range s {
-		if normalize {
+		if opts.Normalize {
 			str = strings.ToLower(str)
 		}
 
