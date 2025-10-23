@@ -1,6 +1,5 @@
 package scule_test
 
-
 import (
 	"testing"
 
@@ -20,10 +19,9 @@ func TestPascalCase(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		assert.Equal(t, test[1], scule.PascalCase(test[0], false))
+		assert.Equal(t, test[1], scule.PascalCase(test[0], scule.Options{}.NewNormalize(false)))
 	}
 }
-
 
 func TestPascalCaseWithNormalization(t *testing.T) {
 	testCases := [][2]string{
@@ -37,6 +35,6 @@ func TestPascalCaseWithNormalization(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		assert.Equal(t, test[1], scule.PascalCase(test[0], true))
+		assert.Equal(t, test[1], scule.PascalCase(test[0], nil))
 	}
 }

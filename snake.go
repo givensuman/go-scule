@@ -10,6 +10,5 @@ Example:
 	SnakeCase("foo-barBaz") // foo_bar_baz
 */
 func SnakeCase(str string) string {
-	// TODO
-	return ""
+	return KebabCase(str, Options{}.NewJoiner("_"))
 }

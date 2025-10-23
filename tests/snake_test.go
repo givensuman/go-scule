@@ -1,5 +1,6 @@
 package scule_test
 
+
 import (
 	"testing"
 
@@ -7,13 +8,13 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCamelCase(t *testing.T) {
+func TestSnakeCase(t *testing.T) {
 	testCases := [][2]string{
-		{"FooBarBaz", "fooBarBaz"},
-		{"FOO_BAR", "fooBar"},
+		{"FooBarBaz", "foo_bar_baz"},
+		{"FOO_BAR", "foo_bar"},
 	}
 
 	for _, test := range testCases {
-		assert.Equal(t, test[1], scule.CamelCase(test[0], nil))
+		assert.Equal(t, test[1], scule.SnakeCase(test[0]))
 	}
 }

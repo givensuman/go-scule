@@ -18,15 +18,15 @@ Example:
 	PascalCase("FooBAR", nil) 		 		// FooBAR
 	PascalCase("FooBAR", nil) 			 	// FooBar
 */
-func PascalCase(str string, opts *Options) string {
-	if opts == nil {
-		opts = defaultOptions()
+func PascalCase(str string, normalize *Normalize) string {
+	if normalize == nil {
+		normalize = Options{}.NewNormalize(true)
 	}
 
 	s := SplitByCase(str, nil)
 
 	for i, str := range s {
-		if opts.Normalize {
+		if normalize.isTrue() {
 			str = strings.ToLower(str)
 		}
 

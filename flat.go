@@ -9,6 +9,5 @@ Example:
 	FlatCase("foo-barBaz") // foobarbaz
 */
 func FlatCase(str string) string {
-	// TODO
-	return ""
+	return KebabCase(str, Options{}.NewJoiner(""))
 }

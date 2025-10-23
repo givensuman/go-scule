@@ -8,11 +8,11 @@ Example:
 	
 	CamelCase("foo-bar_baz") // fooBarBaz
 */
-func CamelCase(str string, opts *Options) string {
-	if opts == nil {
-		opts = defaultOptions()
+func CamelCase(str string, normalize *Normalize) string {
+	if normalize == nil {
+		normalize = Options{}.NewNormalize(true)
 	}
 
-	return LowerFirst(PascalCase(str, opts))
+	return LowerFirst(PascalCase(str, normalize))
 }
 
