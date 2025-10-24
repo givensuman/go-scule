@@ -1,14 +1,11 @@
 package scule
 
-
-/*
-SnakeCase formats string by snake_case
-convention.
-
-Example:
-
-	SnakeCase("foo-barBaz") // foo_bar_baz
-*/
+// SnakeCase formats string by snake_case
+// convention.
+//
+// Example:
+//
+//	SnakeCase("foo-barBaz") // foo_bar_baz
 func SnakeCase(str string) string {
-	return KebabCase(str, Options{}.NewJoiner("_"))
+	return kebabCase(str, "_")
 }

@@ -21,6 +21,6 @@ func TestKebabCase(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		assert.Equal(t, test[1], scule.KebabCase(test[0], nil))
+		assert.Equal(t, test[1], scule.KebabCase(test[0]))
 	}
 }

@@ -22,7 +22,7 @@ func TestTrainCase(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		assert.Equal(t, test[1], scule.TrainCase(test[0], scule.Options{}.NewNormalize(false)))
+		assert.Equal(t, test[1], scule.TrainCase(test[0], false))
 	}
 }
 
@@ -34,6 +34,6 @@ func TestTrainCaseWithNormalize(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		assert.Equal(t, test[1], scule.TrainCase(test[0], nil))
+		assert.Equal(t, test[1], scule.TrainCase(test[0], true))
 	}
 }

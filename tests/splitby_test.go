@@ -33,9 +33,9 @@ func TestSplitByCaseWithCustomSplitter(t *testing.T) {
 		{{"new-name-value"}, {"new-name-value"}},
 	}
 
-	testSplitters := [][]byte{
-		{'\\', '.', '-'},
-		{'_'},
+	testSplitters := [][]string{
+		{"\\", ".", "-"},
+		{"_"},
 	}
 
 	for i, test := range testCases {

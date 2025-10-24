@@ -6,30 +6,28 @@ import (
 	"unicode"
 )
 
-/*
-SplitByCase splits a string by the splitters provided
-(default: {'-', '_', '/', '.'}). It also splits by
-case change of upper-to-lower or lower-to-upper. Numbers
-are ignored for case changes.
-
-Case is preserved in the returned slice, and splitters
-are omitted.
-
-Example:
-
-	SplitByCase("foo-bar_baz") // ["foo", "bar", "baz"]
-	SplitByCase("fooBarBaz")   // ["foo", "Bar", "Baz"]
-	SplitByCase("FOOBar")			 // ["FOO", "Bar"]
-	SplitByCase("foo123-bar")	 // ["foo123", "bar"]
-
-Example with custom splitters:
-
-	SplitByCase("foo//Bar.fizBaz", &[]byte{"//"})
-	// ["foo", "Bar.fiz", "Baz"]
-*/
-func SplitByCase(str string, splitters *[]byte) []string {
+// SplitByCase splits a string by the splitters provided
+// (default: {"-", "_", "/", ".", " "}). It also splits by
+// case change of upper-to-lower or lower-to-upper. Numbers
+// are ignored for case changes.
+//
+// Case is preserved in the returned slice, and splitters
+// are omitted.
+//
+// Examples:
+//
+// 	SplitByCase("foo-bar_baz") // ["foo", "bar", "baz"]
+// 	SplitByCase("fooBarBaz")   // ["foo", "Bar", "Baz"]
+// 	SplitByCase("FOOBar")			 // ["FOO", "Bar"]
+// 	SplitByCase("foo123-bar")	 // ["foo123", "bar"]
+//
+// Example with custom splitters:
+//
+// 	SplitByCase("foo//Bar.fizBaz", &[]byte{"//"})
+// 	// ["foo", "Bar.fiz", "Baz"]
+func SplitByCase(str string, splitters *[]string) []string {
 	if splitters == nil {
-		splitters = &[]byte{'-', '_', '/', '.'}
+		splitters = &[]string{"-", "_", "/", ".", " "}
 	}
 
 	if len(str) == 0 {
@@ -45,7 +43,7 @@ func SplitByCase(str string, splitters *[]byte) []string {
 	for i := range str {
 		c := str[i]
 		isUpper := unicode.IsUpper(rune(str[i]))
-		isSplitter := slices.Contains(*splitters, c)
+		isSplitter := slices.Contains(*splitters, string(c))
 
 		// Splitter case
 		if isSplitter {

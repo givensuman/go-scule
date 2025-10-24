@@ -16,7 +16,7 @@ package scule
 //
 // 	PascalCase("foo-bar_baz", Options{}.NewNormalize(true)) // fooBarBaz
 // 	PascalCase("FooBAR", Options{}.NewNormalize(true)) 			// fooBar
-func CamelCase(str string, normalize *Normalize) string {
+func CamelCase(str string, normalize bool) string {
 	return LowerFirst(PascalCase(str, normalize))
 }
 

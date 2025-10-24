@@ -2,14 +2,12 @@ package scule
 
 import "strings"
 
-/*
-UpperFirst converts the first character to
-upper case.
-
-Example:
-
-	UpperFirst("hello world!") // Hello world!
-*/
+// UpperFirst converts the first character to
+// upper case.
+//
+// Example:
+//
+// 	UpperFirst("hello world!") // Hello world!
 func UpperFirst(str string) string {
 	if len(str) == 0 {
 		return ""
@@ -18,14 +16,12 @@ func UpperFirst(str string) string {
 	return strings.ToUpper(string(str[0])) + str[1:]
 }
 
-/*
-LowerFirst converts the first character to
-lower case.
-
-Example:
-
-	LowerFirst("Hello world!") // hello world!
-*/
+// LowerFirst converts the first character to
+// lower case.
+//
+// Example:
+//
+// 	LowerFirst("Hello world!") // hello world!
 func LowerFirst(str string) string {
 	if len(str) == 0 {
 		return ""
