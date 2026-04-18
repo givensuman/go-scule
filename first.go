@@ -1,19 +1,23 @@
 package scule
 
-import "strings"
+import (
+	"unicode"
+	"unicode/utf8"
+)
 
 // UpperFirst converts the first character to
 // upper case.
 //
 // Example:
 //
-// 	UpperFirst("hello world!") // Hello world!
+//	UpperFirst("hello world!") // Hello world!
 func UpperFirst(str string) string {
 	if len(str) == 0 {
 		return ""
 	}
 
-	return strings.ToUpper(string(str[0])) + str[1:]
+	r, size := utf8.DecodeRuneInString(str)
+	return string(unicode.ToUpper(r)) + str[size:]
 }
 
 // LowerFirst converts the first character to
@@ -21,11 +25,12 @@ func UpperFirst(str string) string {
 //
 // Example:
 //
-// 	LowerFirst("Hello world!") // hello world!
+//	LowerFirst("Hello world!") // hello world!
 func LowerFirst(str string) string {
 	if len(str) == 0 {
 		return ""
 	}
 
-	return strings.ToLower(string(str[:1])) + str[1:]
+	r, size := utf8.DecodeRuneInString(str)
+	return string(unicode.ToLower(r)) + str[size:]
 }

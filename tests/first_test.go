@@ -1,6 +1,5 @@
 package scule_test
 
-
 import (
 	"testing"
 
@@ -13,6 +12,8 @@ func TestUpperFirst(t *testing.T) {
 		{"", ""},
 		{"foo", "Foo"},
 		{"Foo", "Foo"},
+		{"éclair", "Éclair"},
+		{"über", "Über"},
 	}
 
 	for _, test := range testCases {
@@ -25,6 +26,8 @@ func TestLowerFirst(t *testing.T) {
 		{"", ""},
 		{"foo", "foo"},
 		{"Foo", "foo"},
+		{"Éclair", "éclair"},
+		{"Über", "über"},
 	}
 
 	for _, test := range testCases {
