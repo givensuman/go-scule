@@ -58,7 +58,7 @@ SnakeCase("foo-barBaz");
 // foo_bar_baz
 ```
 
-### `FlatCase(str strsing) string`
+### `FlatCase(str string) string`
 
 Splits string and joins by flatcase convention:
 
@@ -106,13 +106,58 @@ LowerFirst("Hello world!");
 // hello world!
 ```
 
-### `SplitByCase(str, splitters *[]string) string`
+### `SplitByCase(str string, splitters *[]string) []string`
 
 - Splits string by the splitters provided (default: `{"-", "_", "/", ".", " "}`)
 - Splits when case changes from lower to upper or upper to lower
 - Ignores numbers for case changes
 - Case is preserved in returned value
 - Is an irreversible function since splitters are omitted
+
+### `UpperCase(str string) string`
+
+Splits string and joins by UPPER CASE convention:
+
+```go
+UpperCase("fooBarBaz");
+// FOO BAR BAZ
+```
+
+### `LowerCase(str string) string`
+
+Splits string and joins by lower case convention:
+
+```go
+LowerCase("fooBarBaz");
+// foo bar baz
+```
+
+### `DotCase(str string) string`
+
+Splits string and joins by dot.case convention:
+
+```go
+DotCase("fooBarBaz");
+// foo.bar.baz
+```
+
+### `PathCase(str string) string`
+
+Splits string and joins by path/case convention:
+
+```go
+PathCase("fooBarBaz");
+// foo/bar/baz
+```
+
+### `SentenceCase(str string) string`
+
+Capitalizes only the first word, rest lower case:
+
+```go
+SentenceCase("fooBarBaz");
+// Foo bar baz
+```
 
 ## License
 
