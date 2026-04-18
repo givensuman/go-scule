@@ -152,7 +152,7 @@ PathCase("fooBarBaz");
 
 ### `SentenceCase(str string) string`
 
-Capitalizes only the first word, rest lower case:
+Capitalizes only the first word, and sets the rest to lower case:
 
 ```go
 SentenceCase("fooBarBaz");
@@ -162,6 +162,3 @@ SentenceCase("fooBarBaz");
 ## License
 
 [MIT](./LICENSE)
-
-<!-- Badges -->
-
