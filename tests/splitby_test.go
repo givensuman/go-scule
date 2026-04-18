@@ -20,6 +20,7 @@ func TestSplitByCase(t *testing.T) {
 		{{"foo123-bar"}, {"foo123", "bar"}},
 		{{"FOOBar"}, {"FOO", "Bar"}},
 		{{"ALink"}, {"A", "Link"}},
+		{{"héllo-wörld"}, {"héllo", "wörld"}},
 	}
 
 	for _, test := range testCases {

@@ -16,15 +16,15 @@ import (
 //
 // Examples:
 //
-// 	SplitByCase("foo-bar_baz") // ["foo", "bar", "baz"]
-// 	SplitByCase("fooBarBaz")   // ["foo", "Bar", "Baz"]
-// 	SplitByCase("FOOBar")			 // ["FOO", "Bar"]
-// 	SplitByCase("foo123-bar")	 // ["foo123", "bar"]
+//	SplitByCase("foo-bar_baz") // ["foo", "bar", "baz"]
+//	SplitByCase("fooBarBaz")   // ["foo", "Bar", "Baz"]
+//	SplitByCase("FOOBar")      // ["FOO", "Bar"]
+//	SplitByCase("foo123-bar")  // ["foo123", "bar"]
 //
 // Example with custom splitters:
 //
-// 	SplitByCase("foo//Bar.fizBaz", &[]byte{"//"})
-// 	// ["foo", "Bar.fiz", "Baz"]
+//	SplitByCase("foo//Bar.fizBaz", &[]string{"//", "."})
+//	// ["foo", "Bar", "fiz", "Baz"]
 func SplitByCase(str string, splitters *[]string) []string {
 	if splitters == nil {
 		splitters = &[]string{"-", "_", "/", ".", " "}
@@ -40,9 +40,9 @@ func SplitByCase(str string, splitters *[]string) []string {
 	var previousWasUpper bool
 	var previousWasSplitter bool
 
-	for i := range str {
-		c := str[i]
-		isUpper := unicode.IsUpper(rune(str[i]))
+	runes := []rune(str)
+	for i, c := range runes {
+		isUpper := unicode.IsUpper(c)
 		isSplitter := slices.Contains(*splitters, string(c))
 
 		// Splitter case
@@ -61,7 +61,7 @@ func SplitByCase(str string, splitters *[]string) []string {
 				parts = append(parts, builder.String())
 
 				builder.Reset()
-				builder.WriteByte(c)
+				builder.WriteRune(c)
 
 				previousWasUpper = isUpper
 				previousWasSplitter = false
@@ -70,14 +70,14 @@ func SplitByCase(str string, splitters *[]string) []string {
 
 			// Falling edge case
 			if previousWasUpper && !isUpper && builder.Len() > 1 {
-				s := builder.String()
-				lastChar := s[len(s)-1]
+				s := []rune(builder.String())
+				lastRune := s[len(s)-1]
 
-				parts = append(parts, s[:len(s)-1])
+				parts = append(parts, string(s[:len(s)-1]))
 
 				builder.Reset()
-				builder.WriteByte(lastChar)
-				builder.WriteByte(c)
+				builder.WriteRune(lastRune)
+				builder.WriteRune(c)
 
 				previousWasUpper = isUpper
 				previousWasSplitter = false
@@ -86,7 +86,7 @@ func SplitByCase(str string, splitters *[]string) []string {
 		}
 
 		// Normal character
-		builder.WriteByte(c)
+		builder.WriteRune(c)
 		previousWasUpper = isUpper
 		previousWasSplitter = false
 	}
