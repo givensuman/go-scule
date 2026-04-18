@@ -7,15 +7,15 @@ import "strings"
 //
 // Examples:
 //
-// 	KebabCase("fooBar_Baz") // foo-bar-baz
-// 	KebabCase("foo--bar")		// foo--bar
-// 	KebabCase("FooBAR")			// foo-bar
+//	KebabCase("fooBar_Baz") // foo-bar-baz
+//	KebabCase("foo--bar")		// foo--bar
+//	KebabCase("FooBAR")			// foo-bar
 func KebabCase(str string) string {
 	return kebabCase(str, "-")
 }
 
 func kebabCase(str string, joiner string) string {
-	s := SplitByCase(str, nil)
+	s := filterWhitespace(SplitByCase(str, nil))
 
 	for i, str := range s {
 		s[i] = strings.ToLower(str)
@@ -23,4 +23,3 @@ func kebabCase(str string, joiner string) string {
 
 	return strings.Join(s, joiner)
 }
-

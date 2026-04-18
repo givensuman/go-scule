@@ -1,6 +1,5 @@
 package scule_test
 
-
 import (
 	"testing"
 
@@ -14,7 +13,7 @@ func TestKebabCase(t *testing.T) {
 		{"foo", "foo"},
 		{"foo/Bar", "foo-bar"},
 		{"foo-bAr", "foo-b-ar"},
-		{"foo--bar", "foo--bar"},
+		{"foo--bar", "foo-bar"},
 		{"FooBAR", "foo-bar"},
 		{"ALink", "a-link"},
 		{"FOO_BAR", "foo-bar"},
