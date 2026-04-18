@@ -1,6 +1,5 @@
 package scule_test
 
-
 import (
 	"testing"
 
@@ -16,6 +15,8 @@ func TestTitleCase(t *testing.T) {
 		{"foo-bar", "Foo Bar"},
 		{"this-IS-aTitle", "This is a Title"},
 		{"THIS is a TITLE", "THIS is a TITLE"},
+		{"the quick brown fox", "The Quick Brown Fox"},
+		{"a tale of two cities", "A Tale of Two Cities"},
 	}
 
 	for _, test := range testCases {
