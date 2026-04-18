@@ -15,8 +15,8 @@ import (
 //
 // Example:
 //
-// 	TrainCase("FooBARb") // Foo-Ba-Rb
-// 	TrainCase("WWWAuthenticate") // WWW-Authenticate
+//	TrainCase("FooBARb") // Foo-Ba-Rb
+//	TrainCase("WWWAuthenticate") // WWW-Authenticate
 func TrainCase(str string, normalize bool) string {
 	s := SplitByCase(str, nil)
 
@@ -34,9 +34,9 @@ func TrainCase(str string, normalize bool) string {
 
 func filterWhitespace(strs []string) []string {
 	var out []string
-	
+
 	for _, str := range strs {
-		if str == "" || str == " " {
+		if strings.TrimSpace(str) == "" {
 			continue
 		}
 
