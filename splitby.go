@@ -16,18 +16,18 @@ import (
 //
 // Examples:
 //
-//	SplitByCase("foo-bar_baz") // ["foo", "bar", "baz"]
-//	SplitByCase("fooBarBaz")   // ["foo", "Bar", "Baz"]
-//	SplitByCase("FOOBar")      // ["FOO", "Bar"]
-//	SplitByCase("foo123-bar")  // ["foo123", "bar"]
+//	SplitByCase("foo-bar_baz", nil) // { "foo", "bar", "baz" }
+//	SplitByCase("fooBarBaz", nil)   // { "foo", "Bar", "Baz" }
+//	SplitByCase("FOOBar", nil)      // { "FOO", "Bar" }
+//	SplitByCase("foo123-bar", nil)  // { "foo123", "bar" }
 //
 // Example with custom splitters:
 //
-//	SplitByCase("foo//Bar.fizBaz", &[]string{"//", "."})
-//	// ["foo", "Bar", "fiz", "Baz"]
-func SplitByCase(str string, splitters *[]string) []string {
+//	SplitByCase("foo//Bar.fizBaz", &Splitters{ "//", "." })
+//	// { "foo", "Bar", "fiz", "Baz" }
+func SplitByCase(str string, splitters *Splitters) []string {
 	if splitters == nil {
-		splitters = &[]string{"-", "_", "/", ".", " "}
+		splitters = &Splitters{"-", "_", "/", ".", " "}
 	}
 
 	if len(str) == 0 {
@@ -43,7 +43,7 @@ func SplitByCase(str string, splitters *[]string) []string {
 	runes := []rune(str)
 	for i, c := range runes {
 		isUpper := unicode.IsUpper(c)
-		isSplitter := slices.Contains(*splitters, string(c))
+		isSplitter := slices.Contains(splitters.toSlice(), string(c))
 
 		// Splitter case
 		if isSplitter {
@@ -93,4 +93,10 @@ func SplitByCase(str string, splitters *[]string) []string {
 
 	parts = append(parts, builder.String())
 	return parts
+}
+
+type Splitters []string
+
+func (s *Splitters) toSlice() []string {
+	return []string(*s)
 }

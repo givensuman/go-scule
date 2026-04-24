@@ -7,5 +7,5 @@ package scule
 //
 // 	FlatCase("foo-barBaz") // foobarbaz
 func FlatCase(str string) string {
-	return kebabCase(str, "")
+	return joinWith(str, "")
 }

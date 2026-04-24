@@ -7,5 +7,5 @@ package scule
 //
 //	SnakeCase("foo-barBaz") // foo_bar_baz
 func SnakeCase(str string) string {
-	return kebabCase(str, "_")
+	return joinWith(str, "_")
 }

@@ -34,7 +34,7 @@ func TestSplitByCaseWithCustomSplitter(t *testing.T) {
 		{{"new-name-value"}, {"new-name-value"}},
 	}
 
-	testSplitters := [][]string{
+	testSplitters := []scule.Splitters{
 		{"\\", ".", "-"},
 		{"_"},
 	}

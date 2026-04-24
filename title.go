@@ -16,13 +16,13 @@ var titleCaseExceptionsRe = regexp.MustCompile(titleCaseExceptions)
 //
 // If an uppercase letter is followed by other uppercase
 // letters (like FooBAR), they are preserved. You can use
-// the `normalize` parameter for strictly only having the
+// `opts.Normalize = true` for strictly only having the
 // first letter uppercased.
 //
 // Example:
 //
 //	TitleCase("this-IS-aTitle") // This is a Title
-func TitleCase(str string, normalize bool) string {
+func TitleCase(str string, opts *TitleCaseOptions) string {
 	s := SplitByCase(str, nil)
 
 	for i, str := range s {
@@ -31,7 +31,7 @@ func TitleCase(str string, normalize bool) string {
 			continue
 		}
 
-		if normalize {
+		if opts != nil && opts.Normalize {
 			str = strings.ToLower(str)
 		}
 
@@ -39,4 +39,8 @@ func TitleCase(str string, normalize bool) string {
 	}
 
 	return strings.Join(s, " ")
+}
+
+type TitleCaseOptions struct {
+	Normalize bool
 }

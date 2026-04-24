@@ -6,22 +6,26 @@ import (
 
 // TrainCase formats string by Train-Case
 // (a.k.a. HTTP-Header-Case) convention.
-//
-// if an uppercase letter is followed by other
+// If an uppercase letter is followed by other
 // uppercase letters (like WWWAuthenticate),
-// they are preserved. You can use the `normalize`
+// they are preserved. You can use the `opts.Normalize = true`
 // parameter for strictly only having the first
 // letter uppercased.
 //
 // Example:
 //
-//	TrainCase("FooBARb") // Foo-Ba-Rb
+//	TrainCase("FooBARb") 				 // Foo-Ba-Rb
 //	TrainCase("WWWAuthenticate") // WWW-Authenticate
-func TrainCase(str string, normalize bool) string {
+//
+// The same examples, with normalization:
+//
+//  TrainCase("FooBARb", &TrainCaseOptions{ Normalize: true }) 				 // Foo-Barb
+//  TrainCase("WWWAuthenticate", &TrainCaseOptions{ Normalize: true }) // Www-Authenticate
+func TrainCase(str string, opts *TrainCaseOptions) string {
 	s := SplitByCase(str, nil)
 
 	for i, str := range s {
-		if normalize {
+		if opts != nil && opts.Normalize {
 			str = strings.ToLower(str)
 		}
 
@@ -32,16 +36,6 @@ func TrainCase(str string, normalize bool) string {
 	return strings.Join(s, "-")
 }
 
-func filterWhitespace(strs []string) []string {
-	var out []string
-
-	for _, str := range strs {
-		if strings.TrimSpace(str) == "" {
-			continue
-		}
-
-		out = append(out, str)
-	}
-
-	return out
+type TrainCaseOptions struct {
+	Normalize bool
 }
