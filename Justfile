@@ -130,7 +130,6 @@ bench:
 # Format code
 fmt:
     {{go}} fmt ./...
-    {{gobin}}/gofumpt -l -w .
 
 # Run linters
 lint:
