@@ -1,6 +1,10 @@
+<div align="center">
+  <img src="./assets/logo.svg" alt="go-scule" width="200" />
+</div>
+
 # go-scule
 
-This is a port of the [unjs.io](https://unjs.io/) scule package to Go.
+This is a port of the [unjs.io/scule](https://unjs.io/packages/scule) package to Go.
 
 ## Install
 
@@ -158,6 +162,10 @@ Capitalizes only the first word, and sets the rest to lower case:
 SentenceCase("fooBarBaz");
 // Foo bar baz
 ```
+
+## Why?
+
+I'm a fan of the [unjs.io](https://unjs.io) ecosystem, particularly their excellent API design. So I thought why not Go?
 
 ## License
 
