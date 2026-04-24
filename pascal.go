@@ -13,12 +13,12 @@ import (
 // Examples:
 //
 //	PascalCase("foo-bar_baz", nil) // FooBarBaz
-//	PascalCase("FooBAR", nil) 		 // FooBAR
+//	PascalCase("FooBAR", nil) // FooBAR
 //
 // The same examples, with normalization:
 //
 //	PascalCase("foo-bar_baz", &PascalCaseOptions{ Normalize: true }) // FooBarBaz
-//	PascalCase("FooBAR", &PascalCaseOptions{ Normalize: true }) 		 // FooBar
+//	PascalCase("FooBAR", &PascalCaseOptions{ Normalize: true }) // FooBar
 func PascalCase(str string, opts *PascalCaseOptions) string {
 	s := SplitByCase(str, nil)
 
@@ -34,5 +34,6 @@ func PascalCase(str string, opts *PascalCaseOptions) string {
 }
 
 type PascalCaseOptions struct {
+	// Strictly follow PascalCase convention.
 	Normalize bool
 }

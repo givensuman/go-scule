@@ -17,9 +17,9 @@ import (
 // Examples:
 //
 //	SplitByCase("foo-bar_baz", nil) // { "foo", "bar", "baz" }
-//	SplitByCase("fooBarBaz", nil)   // { "foo", "Bar", "Baz" }
-//	SplitByCase("FOOBar", nil)      // { "FOO", "Bar" }
-//	SplitByCase("foo123-bar", nil)  // { "foo123", "bar" }
+//	SplitByCase("fooBarBaz", nil) // { "foo", "Bar", "Baz" }
+//	SplitByCase("FOOBar", nil) // { "FOO", "Bar" }
+//	SplitByCase("foo123-bar", nil) // { "foo123", "bar" }
 //
 // Example with custom splitters:
 //

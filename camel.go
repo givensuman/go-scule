@@ -9,16 +9,21 @@ package scule
 // Examples:
 //
 //	CamelCase("foo-bar_baz", nil) // fooBarBaz
-//	CamelCase("FooBAR", nil)      // fooBAR
+//	CamelCase("FooBAR", nil) // fooBAR
 //
 // The same examples, with normalization:
 //
 //	CamelCase("foo-bar_baz", &CamelCaseOptions{ Normalize: true }) // fooBarBaz
-//	CamelCase("FooBAR", &CamelCaseOptions{ Normalize: true })      // fooBar
+//	CamelCase("FooBAR", &CamelCaseOptions{ Normalize: true }) // fooBar
 func CamelCase(str string, opts *CamelCaseOptions) string {
-	return LowerFirst(PascalCase(str, &PascalCaseOptions{Normalize: opts.Normalize}))
+	if opts != nil && opts.Normalize {
+		return LowerFirst(PascalCase(str, &PascalCaseOptions{Normalize: opts.Normalize}))
+	} else {
+		return LowerFirst(PascalCase(str, nil))
+	}
 }
 
 type CamelCaseOptions struct {
+	// Strictly follow camelCase convention.
 	Normalize bool
 }

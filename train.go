@@ -14,13 +14,13 @@ import (
 //
 // Example:
 //
-//	TrainCase("FooBARb") 				 // Foo-Ba-Rb
+//	TrainCase("FooBARb") // Foo-Ba-Rb
 //	TrainCase("WWWAuthenticate") // WWW-Authenticate
 //
 // The same examples, with normalization:
 //
-//  TrainCase("FooBARb", &TrainCaseOptions{ Normalize: true }) 				 // Foo-Barb
-//  TrainCase("WWWAuthenticate", &TrainCaseOptions{ Normalize: true }) // Www-Authenticate
+//	TrainCase("FooBARb", &TrainCaseOptions{ Normalize: true }) // Foo-Barb
+//	TrainCase("WWWAuthenticate", &TrainCaseOptions{ Normalize: true }) // Www-Authenticate
 func TrainCase(str string, opts *TrainCaseOptions) string {
 	s := SplitByCase(str, nil)
 
@@ -37,5 +37,6 @@ func TrainCase(str string, opts *TrainCaseOptions) string {
 }
 
 type TrainCaseOptions struct {
+	// Strictly only have the first letter uppercased.
 	Normalize bool
 }

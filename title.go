@@ -42,5 +42,6 @@ func TitleCase(str string, opts *TitleCaseOptions) string {
 }
 
 type TitleCaseOptions struct {
+	// Strictly only have the first letter uppercased.
 	Normalize bool
 }
