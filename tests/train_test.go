@@ -34,6 +34,6 @@ func TestTrainCaseWithNormalize(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		assert.Equal(t, test[1], scule.TrainCase(test[0], &scule.TrainCaseOptions{Normalize: true}))
+		assert.Equal(t, test[1], scule.TrainCase(test[0], &scule.NormalizeOption{true}))
 	}
 }

@@ -35,6 +35,6 @@ func TestPascalCaseWithNormalization(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		assert.Equal(t, test[1], scule.PascalCase(test[0], &scule.PascalCaseOptions{Normalize: true}))
+		assert.Equal(t, test[1], scule.PascalCase(test[0], &scule.NormalizeOption{true}))
 	}
 }

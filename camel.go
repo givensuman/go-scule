@@ -3,7 +3,7 @@ package scule
 // CamelCase formats string by camelCase convention.
 // If an uppercase letter is followed by other uppercase
 // letters (like FooBAR), they are preserved. You can use
-// `opts.Normalize = true` for strictly following camelCase
+// the normalizeOption parameter for strictly following camelCase
 // convention.
 //
 // Examples:
@@ -13,17 +13,12 @@ package scule
 //
 // The same examples, with normalization:
 //
-//	CamelCase("foo-bar_baz", &CamelCaseOptions{ Normalize: true }) // fooBarBaz
-//	CamelCase("FooBAR", &CamelCaseOptions{ Normalize: true }) // fooBar
-func CamelCase(str string, opts *CamelCaseOptions) string {
-	if opts != nil && opts.Normalize {
-		return LowerFirst(PascalCase(str, &PascalCaseOptions{Normalize: opts.Normalize}))
+//	CamelCase("foo-bar_baz", &NormalizeOption{ true }) // fooBarBaz
+//	CamelCase("FooBAR", &NormalizeOption{ true }) // fooBar
+func CamelCase(str string, normalizeOption *NormalizeOption) string {
+	if normalizeOption != nil {
+		return LowerFirst(PascalCase(str, normalizeOption))
 	} else {
 		return LowerFirst(PascalCase(str, nil))
 	}
-}
-
-type CamelCaseOptions struct {
-	// Strictly follow camelCase convention.
-	Normalize bool
 }

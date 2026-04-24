@@ -1,6 +1,5 @@
 package scule_test
 
-
 import (
 	"testing"
 

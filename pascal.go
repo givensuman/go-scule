@@ -7,8 +7,8 @@ import (
 // PascalCase formats string by PascalCase convention.
 // If an uppercase letter is followed by other uppercase
 // letters (like FooBAR), they are preserved. You can use
-// the `opts.Normalize = true` parameter for
-// strictly following PascalCase convention.
+// the normalizeOption parameter for strictly following
+// PascalCase convention.
 //
 // Examples:
 //
@@ -17,13 +17,13 @@ import (
 //
 // The same examples, with normalization:
 //
-//	PascalCase("foo-bar_baz", &PascalCaseOptions{ Normalize: true }) // FooBarBaz
-//	PascalCase("FooBAR", &PascalCaseOptions{ Normalize: true }) // FooBar
-func PascalCase(str string, opts *PascalCaseOptions) string {
+//	PascalCase("foo-bar_baz", &NormalizeOption{ true }) // FooBarBaz
+//	PascalCase("FooBAR", &NormalizeOption{ true }) // FooBar
+func PascalCase(str string, normalizeOption *NormalizeOption) string {
 	s := SplitByCase(str, nil)
 
 	for i, str := range s {
-		if opts != nil && opts.Normalize {
+		if normalizeOption != nil && normalizeOption.Normalize {
 			str = strings.ToLower(str)
 		}
 
@@ -31,9 +31,4 @@ func PascalCase(str string, opts *PascalCaseOptions) string {
 	}
 
 	return strings.Join(s, "")
-}
-
-type PascalCaseOptions struct {
-	// Strictly follow PascalCase convention.
-	Normalize bool
 }

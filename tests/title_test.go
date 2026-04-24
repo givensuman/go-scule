@@ -35,6 +35,6 @@ func TestTitleCaseWithNormalize(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		assert.Equal(t, test[1], scule.TitleCase(test[0], &scule.TitleCaseOptions{Normalize: true}))
+		assert.Equal(t, test[1], scule.TitleCase(test[0], &scule.NormalizeOption{true}))
 	}
 }

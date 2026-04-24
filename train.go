@@ -8,7 +8,7 @@ import (
 // (a.k.a. HTTP-Header-Case) convention.
 // If an uppercase letter is followed by other
 // uppercase letters (like WWWAuthenticate),
-// they are preserved. You can use the `opts.Normalize = true`
+// they are preserved. You can use the normalizeOption
 // parameter for strictly only having the first
 // letter uppercased.
 //
@@ -19,13 +19,13 @@ import (
 //
 // The same examples, with normalization:
 //
-//	TrainCase("FooBARb", &TrainCaseOptions{ Normalize: true }) // Foo-Barb
-//	TrainCase("WWWAuthenticate", &TrainCaseOptions{ Normalize: true }) // Www-Authenticate
-func TrainCase(str string, opts *TrainCaseOptions) string {
+//	TrainCase("FooBARb", &NormalizeOption{ true }) // Foo-Barb
+//	TrainCase("WWWAuthenticate", &NormalizeOption{ true }) // Www-Authenticate
+func TrainCase(str string, normalizeOption *NormalizeOption) string {
 	s := SplitByCase(str, nil)
 
 	for i, str := range s {
-		if opts != nil && opts.Normalize {
+		if normalizeOption != nil && normalizeOption.Normalize {
 			str = strings.ToLower(str)
 		}
 
@@ -34,9 +34,4 @@ func TrainCase(str string, opts *TrainCaseOptions) string {
 
 	s = filterWhitespace(s)
 	return strings.Join(s, "-")
-}
-
-type TrainCaseOptions struct {
-	// Strictly only have the first letter uppercased.
-	Normalize bool
 }

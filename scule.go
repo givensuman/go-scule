@@ -3,6 +3,11 @@ package scule
 
 import "strings"
 
+type NormalizeOption struct {
+	// Strictly follow case convention.
+	Normalize bool
+}
+
 func filterWhitespace(strs []string) []string {
 	var out []string
 
