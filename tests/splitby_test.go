@@ -9,7 +9,7 @@ import (
 
 func TestSplitByCase(t *testing.T) {
 	testCases := [][][]string{
-		{{""}, {}},
+		{{""}, nil},
 		{{"foo"}, {"foo"}},
 		{{"fooBar"}, {"foo", "Bar"}},
 		{{"FooBarBaz"}, {"Foo", "Bar", "Baz"}},
@@ -24,22 +24,17 @@ func TestSplitByCase(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		assert.Equal(t, test[1], scule.SplitByCase(test[0][0], nil))
+		assert.Equal(t, test[1], scule.SplitByCase(test[0][0]))
 	}
 }
 
 func TestSplitByCaseWithCustomSplitter(t *testing.T) {
-	testCases := [][][]string{
-		{{"foo\\Bar.fuzz-FIZz"}, {"foo", "Bar", "fuzz", "FI", "Zz"}},
-		{{"new-name-value"}, {"new-name-value"}},
-	}
-
-	testSplitters := []scule.Splitters{
-		{"\\", ".", "-"},
-		{"_"},
-	}
-
-	for i, test := range testCases {
-		assert.Equal(t, test[1], scule.SplitByCase(test[0][0], &testSplitters[i]))
-	}
+	assert.Equal(t,
+		[]string{"foo", "Bar", "fuzz", "FI", "Zz"},
+		scule.SplitByCase("foo\\Bar.fuzz-FIZz", "\\", ".", "-"),
+	)
+	assert.Equal(t,
+		[]string{"new-name-value"},
+		scule.SplitByCase("new-name-value", "_"),
+	)
 }

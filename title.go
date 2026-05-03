@@ -5,31 +5,27 @@ import (
 	"strings"
 )
 
-const titleCaseExceptions string = "(?i)^(a|an|and|as|at|but|by|for|if|in|is|nor|of|on|or|the|to|with)$"
+var titleCaseExceptionsRe = regexp.MustCompile(`(?i)^(a|an|and|as|at|but|by|for|if|in|is|nor|of|on|or|the|to|with)$`)
 
-var titleCaseExceptionsRe = regexp.MustCompile(titleCaseExceptions)
-
-// TitleCase formats a string by capitalizing all words,
-// except for minor words. A compact regex of common
-// minor words (such as "a", "for", "to") is used.
-// The first word is always capitalized regardless.
+// TitleCase formats a string by capitalizing all words except minor
+// words (articles, conjunctions, short prepositions). The first word
+// is always capitalized regardless.
 //
-// If an uppercase letter is followed by other uppercase
-// letters (like FooBAR), they are preserved. You can use
-// normalizeOption parameter for strictly only having the
-// first letter uppercased.
+// If uppercase letters are followed by other uppercase letters (like
+// FooBAR), they are preserved. Pass normalize as true to strictly
+// capitalize only the first letter of each word.
 //
-// Example:
+// Examples:
 //
-//	TitleCase("this-IS-aTitle") // This is a Title
-//	TitleCase("THIS is a TITLE") // THIS is a TITLE
+//	TitleCase("this-IS-aTitle", false) // This is a Title
+//	TitleCase("THIS is a TITLE", false) // THIS is a TITLE
 //
 // The same examples, with normalization:
 //
-//	TitleCase("this-IS-aTitle", &NormalizeOption{ true }) // This is a Title
-//	TitleCase("THIS is a TITLE", &NormalizeOption{ true }) // This is a Title
-func TitleCase(str string, normalizeOption *NormalizeOption) string {
-	s := SplitByCase(str, nil)
+//	TitleCase("this-IS-aTitle", true) // This is a Title
+//	TitleCase("THIS is a TITLE", true) // This is a Title
+func TitleCase(str string, normalize bool) string {
+	s := SplitByCase(str)
 
 	for i, str := range s {
 		if i > 0 && titleCaseExceptionsRe.MatchString(str) {
@@ -37,7 +33,7 @@ func TitleCase(str string, normalizeOption *NormalizeOption) string {
 			continue
 		}
 
-		if normalizeOption != nil && normalizeOption.Normalize {
+		if normalize {
 			str = strings.ToLower(str)
 		}
 

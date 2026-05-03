@@ -1,29 +1,26 @@
 package scule
 
-import (
-	"strings"
-)
+import "strings"
 
-// PascalCase formats string by PascalCase convention.
+// PascalCase formats a string by PascalCase convention.
 // If an uppercase letter is followed by other uppercase
-// letters (like FooBAR), they are preserved. You can use
-// the normalizeOption parameter for strictly following
-// PascalCase convention.
+// letters (like FooBAR), they are preserved. Pass
+// normalize as true to strictly follow PascalCase convention.
 //
 // Examples:
 //
-//	PascalCase("foo-bar_baz", nil) // FooBarBaz
-//	PascalCase("FooBAR", nil) // FooBAR
+//	PascalCase("foo-bar_baz", false) // FooBarBaz
+//	PascalCase("FooBAR", false)      // FooBAR
 //
 // The same examples, with normalization:
 //
-//	PascalCase("foo-bar_baz", &NormalizeOption{ true }) // FooBarBaz
-//	PascalCase("FooBAR", &NormalizeOption{ true }) // FooBar
-func PascalCase(str string, normalizeOption *NormalizeOption) string {
-	s := SplitByCase(str, nil)
+//	PascalCase("foo-bar_baz", true) // FooBarBaz
+//	PascalCase("FooBAR", true)      // FooBar
+func PascalCase(str string, normalize bool) string {
+	s := SplitByCase(str)
 
 	for i, str := range s {
-		if normalizeOption != nil && normalizeOption.Normalize {
+		if normalize {
 			str = strings.ToLower(str)
 		}
 

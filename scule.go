@@ -1,12 +1,7 @@
-// Package scule provides string case utiliites.
+// Package scule provides string case utilities.
 package scule
 
 import "strings"
-
-type NormalizeOption struct {
-	// Strictly follow case convention.
-	Normalize bool
-}
 
 func filterWhitespace(strs []string) []string {
 	var out []string
@@ -23,7 +18,7 @@ func filterWhitespace(strs []string) []string {
 }
 
 func joinWith(str string, joiner string) string {
-	s := filterWhitespace(SplitByCase(str, nil))
+	s := filterWhitespace(SplitByCase(str))
 
 	for i, str := range s {
 		s[i] = strings.ToLower(str)

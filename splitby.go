@@ -6,32 +6,31 @@ import (
 	"unicode"
 )
 
-// SplitByCase splits a string by the splitters provided
-// (default: {"-", "_", "/", ".", " "}). It also splits by
-// case change of upper-to-lower or lower-to-upper. Numbers
-// are ignored for case changes.
+// SplitByCase splits a string by the provided splitters
+// (default: "-", "_", "/", ".", " "). It also splits on
+// upper-to-lower and lower-to-upper case boundaries.
+// Numbers are ignored for case changes.
 //
-// Case is preserved in the returned slice, and splitters
+// Case is preserved in the returned slice; splitter characters
 // are omitted.
 //
 // Examples:
 //
-//	SplitByCase("foo-bar_baz", nil) // { "foo", "bar", "baz" }
-//	SplitByCase("fooBarBaz", nil) // { "foo", "Bar", "Baz" }
-//	SplitByCase("FOOBar", nil) // { "FOO", "Bar" }
-//	SplitByCase("foo123-bar", nil) // { "foo123", "bar" }
+//	SplitByCase("foo-bar_baz") // ["foo", "bar", "baz"]
+//	SplitByCase("fooBarBaz")   // ["foo", "Bar", "Baz"]
+//	SplitByCase("FOOBar")      // ["FOO", "Bar"]
+//	SplitByCase("foo123-bar")  // ["foo123", "bar"]
 //
 // Example with custom splitters:
 //
-//	SplitByCase("foo//Bar.fizBaz", &Splitters{ "//", "." })
-//	// { "foo", "Bar", "fiz", "Baz" }
-func SplitByCase(str string, splitters *Splitters) []string {
-	if splitters == nil {
-		splitters = &Splitters{"-", "_", "/", ".", " "}
+//	SplitByCase("foo//Bar.fizBaz", "//", ".") // ["foo", "Bar", "fiz", "Baz"]
+func SplitByCase(str string, splitters ...string) []string {
+	if len(splitters) == 0 {
+		splitters = []string{"-", "_", "/", ".", " "}
 	}
 
 	if len(str) == 0 {
-		return []string{}
+		return nil
 	}
 
 	var parts []string
@@ -43,7 +42,7 @@ func SplitByCase(str string, splitters *Splitters) []string {
 	runes := []rune(str)
 	for i, c := range runes {
 		isUpper := unicode.IsUpper(c)
-		isSplitter := slices.Contains(splitters.toSlice(), string(c))
+		isSplitter := slices.Contains(splitters, string(c))
 
 		// Splitter case
 		if isSplitter {
@@ -93,10 +92,4 @@ func SplitByCase(str string, splitters *Splitters) []string {
 
 	parts = append(parts, builder.String())
 	return parts
-}
-
-type Splitters []string
-
-func (s *Splitters) toSlice() []string {
-	return []string(*s)
 }

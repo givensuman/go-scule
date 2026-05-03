@@ -14,7 +14,7 @@ func TestCamelCase(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		assert.Equal(t, test[1], scule.CamelCase(test[0], nil))
+		assert.Equal(t, test[1], scule.CamelCase(test[0], false))
 	}
 }
 
@@ -25,6 +25,6 @@ func TestCamelCaseWithNormalization(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		assert.Equal(t, test[1], scule.CamelCase(test[0], &scule.NormalizeOption{true}))
+		assert.Equal(t, test[1], scule.CamelCase(test[0], true))
 	}
 }

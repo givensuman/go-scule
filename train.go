@@ -1,31 +1,26 @@
 package scule
 
-import (
-	"strings"
-)
+import "strings"
 
-// TrainCase formats string by Train-Case
-// (a.k.a. HTTP-Header-Case) convention.
-// If an uppercase letter is followed by other
-// uppercase letters (like WWWAuthenticate),
-// they are preserved. You can use the normalizeOption
-// parameter for strictly only having the first
-// letter uppercased.
+// TrainCase formats a string by Train-Case (HTTP-Header-Case) convention.
+// If uppercase letters are followed by other uppercase letters (like
+// WWWAuthenticate), they are preserved. Pass normalize as true to
+// strictly capitalize only the first letter of each word.
 //
-// Example:
+// Examples:
 //
-//	TrainCase("FooBARb") // Foo-Ba-Rb
-//	TrainCase("WWWAuthenticate") // WWW-Authenticate
+//	TrainCase("FooBARb", false)        // Foo-BA-Rb
+//	TrainCase("WWWAuthenticate", false) // WWW-Authenticate
 //
 // The same examples, with normalization:
 //
-//	TrainCase("FooBARb", &NormalizeOption{ true }) // Foo-Barb
-//	TrainCase("WWWAuthenticate", &NormalizeOption{ true }) // Www-Authenticate
-func TrainCase(str string, normalizeOption *NormalizeOption) string {
-	s := SplitByCase(str, nil)
+//	TrainCase("FooBARb", true)        // Foo-Barb
+//	TrainCase("WWWAuthenticate", true) // Www-Authenticate
+func TrainCase(str string, normalize bool) string {
+	s := SplitByCase(str)
 
 	for i, str := range s {
-		if normalizeOption != nil && normalizeOption.Normalize {
+		if normalize {
 			str = strings.ToLower(str)
 		}
 
