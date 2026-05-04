@@ -80,7 +80,7 @@ TrainCase("FooBARb");
 // Foo-Ba-Rb
 ```
 
-**Notice:** If an uppercase letter is followed by other uppercase letters (like `WWWAuthenticate`), they are preserved (=> `WWW-Authenticate`). You can use `{ normalize: true }` for strictly only having the first letter uppercased.
+**Notice:** If an uppercase letter is followed by other uppercase letters (like `WWWAuthenticate`), they are preserved (=> `WWW-Authenticate`). You can use the `normalize` parameter for strictly only having the first letter uppercased.
 
 ### `TitleCase(str string, normalize bool) string`
 
@@ -110,17 +110,13 @@ LowerFirst("Hello world!");
 // hello world!
 ```
 
-### `SplitByCase(str string, splitters *[]string) []string`
+### `SplitByCase(str string, splitters ...string) []string`
 
 - Splits string by the splitters provided (default: `{"-", "_", "/", ".", " "}`)
 - Splits when case changes from lower to upper or upper to lower
 - Ignores numbers for case changes
 - Case is preserved in returned value
 - Is an irreversible function since splitters are omitted
-
-## Why?
-
-I'm a fan of the [unjs.io](https://unjs.io) ecosystem, particularly their excellent API design. So I thought why not Go?
 
 ## License
 
